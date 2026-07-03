@@ -5,8 +5,16 @@ Question 5 – Storage Health Assessment and Documentation
 Command:
 lsblk
 
+Output:
+NAME MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda    8:0    0 364.8M  1 disk
+sdb    8:16   0 144.5M  1 disk
+sdc    8:32   0     2G  0 disk [SWAP]
+sdd    8:48   0     1T  0 disk /mnt/wslg/distro
+                              /
+
 Observation:
-The lsblk command displayed all available storage devices, their sizes, types, and mount points. It provides an overview of the storage devices connected to the system.
+The lsblk command listed all block storage devices attached to the system. sdd is the main 1TB disk mounted at "/", sdc is used as swap space, and sda/sdb are smaller auxiliary devices used internally by WSL.
 
 --------------------------------------------------
 
@@ -15,15 +23,22 @@ The lsblk command displayed all available storage devices, their sizes, types, a
 Command:
 df -h
 
+Output (key lines):
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G   18G  938G   2% /
+drivers         200G  153G   47G  77% /usr/lib/wsl/drivers
+C:\             200G  153G   47G  77% /mnt/c
+tmpfs           733M   12K  733M   1% /run/user/1000
+
 Observation:
-The df -h command displayed all mounted file systems along with their total size, used space, available space, and percentage of usage in a human-readable format.
+The df -h command displayed all mounted file systems in human-readable form. The root filesystem (/dev/sdd) has 1007G total with only 18G (2%) used, showing plenty of headroom. The Windows drive (C:\, mounted via /mnt/c) is at 77% usage, which is comparatively high and worth monitoring.
 
 --------------------------------------------------
 
 3. Disk Usage Statistics
 
 Observation:
-The root filesystem (/dev/sdd) has approximately 1007 GB of storage with only a small percentage currently in use. Most of the available storage remains free, indicating sufficient capacity for application deployment.
+The root filesystem (/dev/sdd) has approximately 1007 GB of total storage with only 18 GB (2%) currently in use, leaving 938 GB available. This indicates significant free capacity for future application deployment or data storage. In contrast, the mounted Windows drive (/mnt/c) is already at 77% usage and has comparatively less headroom.
 
 --------------------------------------------------
 
@@ -32,27 +47,31 @@ The root filesystem (/dev/sdd) has approximately 1007 GB of storage with only a 
 Command:
 df -i
 
+Output (key line):
+Filesystem      Inodes  IUsed    IFree IUse% Mounted on
+/dev/sdd     67108864  402487 66706377    1% /
+
 Observation:
-The df -i command showed that inode usage is very low (around 1%), indicating that the filesystem has a large number of free inodes available for creating additional files.
+The df -i command showed that the root filesystem has roughly 67.1 million total inodes, with only about 402,000 (1%) in use. This confirms the filesystem has a very large number of free inodes available, so running out of inodes (which would prevent creating new files even with free disk space) is not a near-term concern.
 
 --------------------------------------------------
 
 5. Storage Health Observations
 
-The storage devices are functioning normally, mounted correctly, and have sufficient available disk space and inodes. No storage-related issues were observed during the assessment.
+Based on the outputs above, the storage devices are functioning normally, correctly mounted, and have sufficient available disk space (938G free on /) and inodes (66.7M free) on the root filesystem. The only point worth flagging is the /mnt/c (Windows C: drive) mount, which is already at 77% usage — not critical, but higher than the root filesystem and worth periodic monitoring. No other storage-related issues were observed during the assessment.
 
 --------------------------------------------------
 
 6. Recommendations for Improving Storage Utilization
 
-- Regularly monitor disk usage.
-- Remove unnecessary or temporary files.
+- Regularly monitor disk usage, especially on /mnt/c which is already at 77%.
+- Remove unnecessary or temporary files, particularly on the Windows-side drive.
 - Archive old project data when appropriate.
-- Monitor inode usage for filesystems containing many small files.
-- Perform periodic storage health checks.
+- Monitor inode usage for filesystems containing many small files, even though it's currently low.
+- Perform periodic storage health checks using df -h and df -i.
 
 --------------------------------------------------
 
 Conclusion
 
-The storage assessment indicates that the system has healthy storage resources with adequate disk space and inode availability. The storage configuration is suitable for deploying new applications.
+The storage assessment indicates that the system has healthy storage resources overall, with adequate disk space and inode availability on the root filesystem (/dev/sdd). The /mnt/c mount is comparatively fuller and should be watched going forward. The storage configuration is otherwise suitable for deploying new applications.
