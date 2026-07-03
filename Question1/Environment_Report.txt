@@ -1,0 +1,71 @@
+Question 1 – Linux Environment Verification
+
+1. Username and Groups
+
+Command:
+id
+
+Output:
+uid=1000(kalpna) gid=1000(kalpna) groups=1000(kalpna),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users),1001(docker)
+
+Observation:
+The `id` command displays the current user's identity information, including the user ID (UID), group ID (GID), and all groups associated with the account. It confirms the user's account details and group memberships, which are important for determining access permissions in Linux.
+
+--------------------------------------------------
+
+2. Current Shell
+
+Command:
+echo $SHELL
+
+Output:
+/bin/bash
+
+Observation:
+The `echo $SHELL` command displays the default shell assigned to the current user. The output shows that Bash is being used, which is the command-line interpreter for executing Linux commands.
+
+--------------------------------------------------
+
+3. Current Working Directory
+
+Command:
+pwd
+
+Output:
+/home/kalpna/Linux_Assignment1/Question1
+
+Observation:
+The `pwd` command prints the absolute path of the current working directory. This confirms that all commands were executed inside the Question1 folder, ensuring the work is organized correctly.
+
+--------------------------------------------------
+
+4. List of Files and Directories
+
+Command:
+ls -la
+
+Output:
+total 8
+drwxr-xr-x 2 kalpna kalpna 4096 Jul 3 04:44 .
+drwxr-xr-x 8 kalpna kalpna 4096 Jul 3 04:49 ..
+
+Observation:
+The `ls -la` command lists all files and directories, including hidden files, along with detailed information such as permissions, ownership, size, and modification time. It provides a complete view of the current workspace.
+
+--------------------------------------------------
+
+5. Network Connectivity Verification
+
+Command:
+ping -c 4 google.com
+
+Output:
+4 packets transmitted, 4 received, 0% packet loss
+
+Observation:
+The `ping` command verifies network connectivity by sending ICMP echo requests to a remote server. The successful replies with 0% packet loss confirm that the system has an active and stable network connection.
+
+--------------------------------------------------
+
+Conclusion:
+The Linux environment was successfully verified. The user account details, shell, working directory, workspace contents, and network connectivity were all confirmed successfully.

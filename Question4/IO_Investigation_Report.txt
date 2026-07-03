@@ -1,0 +1,49 @@
+Question 4 – File Access and I/O Investigation
+
+1. Open Files Identified
+
+Command:
+lsof app.log
+
+Observation:
+The lsof command displayed the process currently accessing app.log. It showed the process name, process ID (PID), file descriptor, and the file being accessed. This confirms that Linux keeps track of open files used by running processes.
+
+--------------------------------------------------
+
+2. File Descriptor Observations
+
+Observation:
+The file descriptor shown by lsof was used by the tail process to read the log file. File descriptors are unique numbers assigned by the operating system to manage open files during program execution.
+
+--------------------------------------------------
+
+3. Output Redirection and Error Redirection
+
+Commands:
+echo "Normal output message" > output.txt
+ls nonexistentfile 2> error.txt
+
+Observation:
+The > operator redirected the normal command output to output.txt. The 2> operator redirected the error message to error.txt, keeping normal output and error output separate.
+
+--------------------------------------------------
+
+4. Resource Limits Observed
+
+Command:
+ulimit -a
+
+Observation:
+The ulimit command displayed the current resource limits for the shell, including maximum open files, stack size, memory limits, CPU time, and other system resources. These limits help protect the system from excessive resource usage.
+
+--------------------------------------------------
+
+5. How Linux Manages File I/O
+
+Linux manages file input and output using file descriptors. Every open file is assigned a descriptor, allowing programs to read from or write to files efficiently. Input, output, and error streams can also be redirected independently using shell redirection operators.
+
+--------------------------------------------------
+
+Conclusion
+
+The investigation demonstrated how Linux tracks open files, manages file descriptors, redirects standard output and error streams, and controls resource usage through system limits. These features help ensure efficient and secure file management.

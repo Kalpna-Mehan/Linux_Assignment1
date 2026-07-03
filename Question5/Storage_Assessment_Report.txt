@@ -1,0 +1,58 @@
+Question 5 – Storage Health Assessment and Documentation
+
+1. Available Storage Devices
+
+Command:
+lsblk
+
+Observation:
+The lsblk command displayed all available storage devices, their sizes, types, and mount points. It provides an overview of the storage devices connected to the system.
+
+--------------------------------------------------
+
+2. Mounted File Systems
+
+Command:
+df -h
+
+Observation:
+The df -h command displayed all mounted file systems along with their total size, used space, available space, and percentage of usage in a human-readable format.
+
+--------------------------------------------------
+
+3. Disk Usage Statistics
+
+Observation:
+The root filesystem (/dev/sdd) has approximately 1007 GB of storage with only a small percentage currently in use. Most of the available storage remains free, indicating sufficient capacity for application deployment.
+
+--------------------------------------------------
+
+4. Inode Utilization
+
+Command:
+df -i
+
+Observation:
+The df -i command showed that inode usage is very low (around 1%), indicating that the filesystem has a large number of free inodes available for creating additional files.
+
+--------------------------------------------------
+
+5. Storage Health Observations
+
+The storage devices are functioning normally, mounted correctly, and have sufficient available disk space and inodes. No storage-related issues were observed during the assessment.
+
+--------------------------------------------------
+
+6. Recommendations for Improving Storage Utilization
+
+- Regularly monitor disk usage.
+- Remove unnecessary or temporary files.
+- Archive old project data when appropriate.
+- Monitor inode usage for filesystems containing many small files.
+- Perform periodic storage health checks.
+
+--------------------------------------------------
+
+Conclusion
+
+The storage assessment indicates that the system has healthy storage resources with adequate disk space and inode availability. The storage configuration is suitable for deploying new applications.

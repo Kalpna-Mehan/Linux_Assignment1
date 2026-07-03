@@ -1,0 +1,78 @@
+Question 2 – Secure Project Workspace Setup
+
+1. Directory Structure Created
+
+Commands:
+mkdir ProjectWorkspace
+mkdir Documents SourceCode
+touch Documents/plan.txt SourceCode/main.c
+
+Directory Structure:
+ProjectWorkspace/
+├── Documents/
+│   └── plan.txt
+└── SourceCode/
+    └── main.c
+
+Observation:
+A secure project workspace was created with separate folders for documents and source code. This structure helps organize project files efficiently.
+
+--------------------------------------------------
+
+2. File Permissions Before Modification
+
+Commands:
+ls -ld .
+ls -l
+ls -l Documents
+ls -l SourceCode
+
+Observation:
+The initial permissions were assigned automatically according to the system umask value. The directories and files had the default Linux permissions.
+
+--------------------------------------------------
+
+3. File Permissions After Modification
+
+Commands:
+chmod 700 Documents
+chmod 600 Documents/plan.txt
+chmod 755 SourceCode
+chmod 644 SourceCode/main.c
+
+Observation:
+Permissions were modified to improve security. The Documents folder is now accessible only by the owner, while SourceCode remains readable by others. Sensitive files have more restrictive permissions.
+
+--------------------------------------------------
+
+4. Ownership Details
+
+Observation:
+The owner and group for all created files and directories are:
+Owner: kalpna
+Group: kalpna
+
+--------------------------------------------------
+
+5. Umask Value
+
+Command:
+umask
+
+Output:
+0022
+
+Observation:
+The umask value 0022 removes write permission for the group and others when new files and directories are created. This provides secure default permissions.
+
+--------------------------------------------------
+
+6. How Permissions Protect Project Data
+
+Linux file permissions control who can read, write, and execute files and directories. Restricting access prevents unauthorized users from modifying or viewing sensitive project files while allowing appropriate access where required.
+
+--------------------------------------------------
+
+Conclusion
+
+The secure project workspace was successfully created. Directory permissions, ownership, and umask settings were verified and configured to protect project files.
