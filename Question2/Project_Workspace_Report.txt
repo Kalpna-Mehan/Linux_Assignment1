@@ -1,4 +1,4 @@
-\Question 2 – Secure Project Workspace Setup
+Question 2 – Secure Project Workspace Setup
 
 1. Directory Structure Created
 
